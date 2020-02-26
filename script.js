@@ -15,10 +15,10 @@ function generatePassword() {
     alert(
       "You must select at least one lowercase, uppercase, numeric or special characters"
     );
-    var lowerCase = confirm("Would you like to include lowercase letters?");
-    var upperCase = confirm("Would you like to include uppercase letters?");
-    var numeric = confirm("Would you like to include numbers?");
-    var specialChar = confirm("Would you like to include special characters?");
+    lowerCase = confirm("Would you like to include lowercase letters?");
+    upperCase = confirm("Would you like to include uppercase letters?");
+    numeric = confirm("Would you like to include numbers?");
+    specialChar = confirm("Would you like to include special characters?");
   } while (
     lowerCase == false &&
     upperCase == false &&
@@ -32,11 +32,11 @@ function generatePassword() {
   console.log(specialChar);
 
   // defining the character sets
-    var lowerCaseCharset = "abcdefghijklmnopqrstuvwxyz";
+  (lowerCaseCharset = "abcdefghijklmnopqrstuvwxyz"),
     (upperCaseCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
     (numericCharset = "0123456789"),
     (specialCharCharset = "`~!@#$%^&*()-_=+|{}[]':;/?.,><");
-     
+
   var charset = "";
   // If lowercase and uppercase then add characterets together
   if (lowerCase === true) {
@@ -59,17 +59,27 @@ function generatePassword() {
     retPassword += charset.charAt(Math.floor(Math.random() * n));
   }
 
-  var update = new RegExp(lowerCaseCharset);
-
-var done = update.test(retPassword);
-
-console.log(done + retPassword);
-
+  console.log(retPassword);
+  checkPassword(retPassword);
   return retPassword;
 }
 
-
-// console.log(lowerCaseCharset.test(retPassword));
+// This takes the password and checks if contains the initial VREyeParameters, if Notification, recreates password
+function checkPassword() {
+  if (/[a-z]/g.test(retPassword) === false && lowerCase === true) {
+    alert("There is no lowercase letter - Generating new password");
+    generatePassword();
+  } else if (/[A-Z]/g.test(retPassword) === false && upperCase === true) {
+    alert("There is no uppercase letter - Generating new password");
+    generatePassword();
+  } else if (/[0-9]/g.test(retPassword) === false && numeric === true) {
+    alert("There is no number - Generating new password");
+    generatePassword();
+  } else if (/\W|_/g.test(retPassword) === false && specialChar === true) {
+    alert("There is special character - Generating new password");
+    generatePassword();
+  }
+}
 
 // Write password to the #password input
 function writePassword() {
