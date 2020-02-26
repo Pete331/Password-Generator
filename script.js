@@ -1,11 +1,12 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-function generatePassword() {
+// function to get password parameters - have a number of blobal variables
+function passwordParamaters() {
   // Prompt for length and repeat until correct input
-  var length = prompt("How Long would you like your password?");
-  while (length < 8 || length > 128) {
-    var length = prompt(
+  passwordLength = prompt("How Long would you like your password?");
+  while (passwordLength < 8 || passwordLength > 128) {
+    passwordlength = prompt(
       "Invalid: Password has to be between 8 and 128 characters in length. How Long would you like your password?"
     );
   }
@@ -26,10 +27,10 @@ function generatePassword() {
     specialChar == false
   );
 
-  console.log(lowerCase);
-  console.log(upperCase);
-  console.log(numeric);
-  console.log(specialChar);
+  console.log("lowercase selected = " + lowerCase);
+  console.log("uppercase selected = " + upperCase);
+  console.log("numeric selected = " + numeric);
+  console.log("specialChar selected = " + specialChar);
 
   // defining the character sets
   (lowerCaseCharset = "abcdefghijklmnopqrstuvwxyz"),
@@ -37,8 +38,8 @@ function generatePassword() {
     (numericCharset = "0123456789"),
     (specialCharCharset = "`~!@#$%^&*()-_=+|{}[]':;/?.,><");
 
-  var charset = "";
-  // If lowercase and uppercase then add characterets together
+  charset = "";
+  // adds selected character sets depending on what was selected
   if (lowerCase === true) {
     charset += lowerCaseCharset;
   }
@@ -52,10 +53,12 @@ function generatePassword() {
     charset += specialCharCharset;
   }
   console.log(charset);
+}
 
+function generatePassword() {
   // looping through the character set 'length' (initial prompt) number of times to select random characters
   retPassword = "";
-  for (var i = 0, n = charset.length; i < length; ++i) {
+  for (var i = 0, n = charset.length; i < passwordLength; ++i) {
     retPassword += charset.charAt(Math.floor(Math.random() * n));
   }
 
@@ -64,25 +67,26 @@ function generatePassword() {
   return retPassword;
 }
 
-// This takes the password and checks if contains the initial VREyeParameters, if Notification, recreates password
+// This takes the password and checks if contains the initial Parameters, if Not , recreates password
 function checkPassword() {
   if (/[a-z]/g.test(retPassword) === false && lowerCase === true) {
-    alert("There is no lowercase letter - Generating new password");
+    console.log("There is no lowercase letter - Generating new password");
     generatePassword();
   } else if (/[A-Z]/g.test(retPassword) === false && upperCase === true) {
-    alert("There is no uppercase letter - Generating new password");
+    console.log("There is no uppercase letter - Generating new password");
     generatePassword();
   } else if (/[0-9]/g.test(retPassword) === false && numeric === true) {
-    alert("There is no number - Generating new password");
+    console.log("There is no number - Generating new password");
     generatePassword();
   } else if (/\W|_/g.test(retPassword) === false && specialChar === true) {
-    alert("There is special character - Generating new password");
+    console.log("There is special character - Generating new password");
     generatePassword();
   }
 }
 
 // Write password to the #password input
 function writePassword() {
+  passwordParamaters();
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
