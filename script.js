@@ -1,14 +1,14 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// function to get password parameters - have a number of blobal variables
-function passwordParamaters() {
+function lengthPassword() {
   // Prompt for length and repeat until correct input
-  passwordLength = prompt("How Long would you like your password?");
+  passwordLength = 0;
   while (passwordLength < 8 || passwordLength > 128) {
-    passwordlength = prompt(
-      "Invalid: Password has to be between 8 and 128 characters in length. How Long would you like your password?"
+    passwordLength = prompt(
+      "How Long would you like your password? - Must be between 8 and 128 characters"
     );
+    console.log(passwordLength);
   }
 
   // prompts for password character parameters and repeats if none selected
@@ -31,7 +31,11 @@ function passwordParamaters() {
   console.log("uppercase selected = " + upperCase);
   console.log("numeric selected = " + numeric);
   console.log("specialChar selected = " + specialChar);
+  passwordParamaters(passwordLength);
+}
 
+// function to get password parameters - have a number of blobal variables
+function passwordParamaters() {
   // defining the character sets
   (lowerCaseCharset = "abcdefghijklmnopqrstuvwxyz"),
     (upperCaseCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
@@ -86,7 +90,7 @@ function checkPassword() {
 
 // Write password to the #password input
 function writePassword() {
-  passwordParamaters();
+  lengthPassword();
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
